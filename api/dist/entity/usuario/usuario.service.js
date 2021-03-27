@@ -16,17 +16,32 @@ exports.UsuarioService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
 let UsuarioService = class UsuarioService {
-    constructor(usuarioRepository) {
+    constructor(usuarioRepository, tipoUsuarioRepository) {
         this.usuarioRepository = usuarioRepository;
+        this.tipoUsuarioRepository = tipoUsuarioRepository;
     }
-    async all() {
+    async listar() {
         return this.usuarioRepository.find();
+    }
+    async tiposUsuario() {
+        return this.tipoUsuarioRepository.find();
+    }
+    async cadastrar() {
+        return this.tipoUsuarioRepository.find();
+    }
+    async editar() {
+        return this.tipoUsuarioRepository.find();
+    }
+    async visualizar() {
+        return this.tipoUsuarioRepository.find();
     }
 };
 UsuarioService = __decorate([
     common_1.Injectable(),
     __param(0, common_1.Inject('USUARIO_REPOSITORY')),
-    __metadata("design:paramtypes", [typeorm_1.Repository])
+    __param(1, common_1.Inject('TIPOUSUARIO_REPOSITORY')),
+    __metadata("design:paramtypes", [typeorm_1.Repository,
+        typeorm_1.Repository])
 ], UsuarioService);
 exports.UsuarioService = UsuarioService;
 //# sourceMappingURL=usuario.service.js.map

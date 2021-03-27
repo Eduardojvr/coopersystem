@@ -1,4 +1,6 @@
+import { TipoUsuario } from './tipoUsuario.entity';
 import { Usuario } from './usuario.entity';
+
 import { Controller, Get } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 
@@ -6,8 +8,14 @@ import { UsuarioService } from './usuario.service';
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
-  @Get('/all')
+
+  @Get('/listar')
   async all(): Promise<Usuario[]> {
-    return this.usuarioService.all();
+    return this.usuarioService.listar();
+  }
+
+  @Get('/tipoUsuario')
+  async tipoUsuario(): Promise<TipoUsuario[]> {
+    return this.usuarioService.tiposUsuario();
   }
 }

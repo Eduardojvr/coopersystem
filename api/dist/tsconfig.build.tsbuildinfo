@@ -2816,19 +2816,24 @@
         "signature": "ddba4547819fece6ae31e1dd166602ef1ad4694224e7568e3484a608096084cb",
         "affectsGlobalScope": false
       },
+      "../src/entity/usuario/tipoUsuario.entity.ts": {
+        "version": "0c63f8c6b708bb81f633a7a5abed967c65b14a8a0b560d7414224c2fe2b136c8",
+        "signature": "6ff39cc766daece77af88973b1963249c07634d7904fef7015b8271a205cb986",
+        "affectsGlobalScope": false
+      },
       "../src/entity/usuario/usuario.providers.ts": {
-        "version": "fc192b9f8f585ef8b0ea2267cdfb9f1db113bde89972e3ecb3a46d1e6cd2ae70",
-        "signature": "ac5b1793609eb3487c86ee555166d4423da13016859747ee2e26c6b0bc071962",
+        "version": "e2cb2626b980255b39d6b39c5cdf2e018a173c2cf66c7c3f92daf2d3827de302",
+        "signature": "111abc6dee0970daf4e1e667e2a87aba5d9f6761c2f45aafc56fce2a299d5ce8",
         "affectsGlobalScope": false
       },
       "../src/entity/usuario/usuario.service.ts": {
-        "version": "381bb9eb9d219e493cf55a1564857e5aaf75c37d41a1ce7928b4a28ef666274d",
-        "signature": "8ec8372675d377ad112ee39d1f3d54f5ead24768dac4f0353b1b7992a3a1fdd3",
+        "version": "f667f999f1adff03947a04c181f32f4bb2f42d16345436aaa8a42b2d43883460",
+        "signature": "51e624fa2fe42514d9dfced273d44a091d019f300cb43d2576a56a3573b4553d",
         "affectsGlobalScope": false
       },
       "../src/entity/usuario/usuario.controller.ts": {
-        "version": "df7a1df86823eb1802cedc67086be8f11a86b573a88b513c8c8cc011031aa163",
-        "signature": "7426ff6b57957218a0c33effcdb93ef4d853a67bf0bfa62b801b4a4863e3184b",
+        "version": "2cfa35046ebbc3e1c405967700ddfaa3026681ce0cf442646420ed383b5fc448",
+        "signature": "6c19f812487a5f91d1c58c0a35e1c9fc73b7c9b2b40b8046611fff30a83959a8",
         "affectsGlobalScope": false
       },
       "../src/entity/usuario/usuario.module.ts": {
@@ -3022,7 +3027,7 @@
         "affectsGlobalScope": false
       },
       "../src/main.ts": {
-        "version": "e25d9bd8f80b6ffbcc8826ed1b407e747e4fbe346c5bab62cbe5837da4eeb189",
+        "version": "1b6aa8949efc5ec0d69a1ce14192e240588c733b0e0d8c5925f76bb678407d25",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
@@ -5969,8 +5974,12 @@
       "../src/database/database.providers.ts": [
         "../node_modules/typeorm/index.d.ts"
       ],
+      "../src/entity/usuario/tipoUsuario.entity.ts": [
+        "../node_modules/typeorm/index.d.ts"
+      ],
       "../src/entity/usuario/usuario.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
+        "../src/entity/usuario/tipoUsuario.entity.ts",
         "../src/entity/usuario/usuario.entity.ts",
         "../src/entity/usuario/usuario.service.ts"
       ],
@@ -5986,11 +5995,13 @@
       ],
       "../src/entity/usuario/usuario.providers.ts": [
         "../node_modules/typeorm/index.d.ts",
+        "../src/entity/usuario/tipoUsuario.entity.ts",
         "../src/entity/usuario/usuario.entity.ts"
       ],
       "../src/entity/usuario/usuario.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/typeorm/index.d.ts",
+        "../src/entity/usuario/tipoUsuario.entity.ts",
         "../src/entity/usuario/usuario.entity.ts"
       ],
       "../src/main.ts": [
@@ -8478,15 +8489,18 @@
         "../node_modules/typeorm/index.d.ts"
       ],
       "../src/entity/usuario/usuario.controller.ts": [
+        "../src/entity/usuario/tipoUsuario.entity.ts",
         "../src/entity/usuario/usuario.entity.ts",
         "../src/entity/usuario/usuario.service.ts"
       ],
       "../src/entity/usuario/usuario.providers.ts": [
         "../node_modules/typeorm/index.d.ts",
+        "../src/entity/usuario/tipoUsuario.entity.ts",
         "../src/entity/usuario/usuario.entity.ts"
       ],
       "../src/entity/usuario/usuario.service.ts": [
         "../node_modules/typeorm/index.d.ts",
+        "../src/entity/usuario/tipoUsuario.entity.ts",
         "../src/entity/usuario/usuario.entity.ts"
       ]
     },
@@ -9177,6 +9191,7 @@
       "../src/app.service.ts",
       "../src/database/database.module.ts",
       "../src/database/database.providers.ts",
+      "../src/entity/usuario/tipoUsuario.entity.ts",
       "../src/entity/usuario/usuario.controller.ts",
       "../src/entity/usuario/usuario.entity.ts",
       "../src/entity/usuario/usuario.module.ts",

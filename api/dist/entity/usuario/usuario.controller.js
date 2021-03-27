@@ -17,15 +17,24 @@ let UsuarioController = class UsuarioController {
         this.usuarioService = usuarioService;
     }
     async all() {
-        return this.usuarioService.all();
+        return this.usuarioService.listar();
+    }
+    async tipoUsuario() {
+        return this.usuarioService.tiposUsuario();
     }
 };
 __decorate([
-    common_1.Get('/all'),
+    common_1.Get('/listar'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "all", null);
+__decorate([
+    common_1.Get('/tipoUsuario'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "tipoUsuario", null);
 UsuarioController = __decorate([
     common_1.Controller(),
     __metadata("design:paramtypes", [usuario_service_1.UsuarioService])
