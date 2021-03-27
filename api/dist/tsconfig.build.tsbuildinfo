@@ -1532,7 +1532,7 @@
         "affectsGlobalScope": false
       },
       "../src/auth/shared/jwt.strategy.ts": {
-        "version": "76abd41d07dd0186fccdf37abb26cb1428ec3d872e63253b97524813fc9bd424",
+        "version": "ba72050d2366afe8702d61c36c0bc04dac53222ba7f7e58d0d33328dc1ab96c2",
         "signature": "f828dd3e9a4a944a53d71f40a30fe89728b7284245859c6612276007c054da0f",
         "affectsGlobalScope": false
       },
@@ -3202,7 +3202,7 @@
         "affectsGlobalScope": false
       },
       "../src/auth/shared/auth.service.ts": {
-        "version": "7befe6831c1c85ce8ac796712b3e0e2170a5ba539540c20c6a6f36b88ba3a359",
+        "version": "fe810bac350284125db796e6ec9b386c96a005f2505ea2dead2f664820f33dcc",
         "signature": "cd1e481f56aa98e0f75bc6b7d8136d17e3946b016757414ede40a01dd308a83b",
         "affectsGlobalScope": false
       },
