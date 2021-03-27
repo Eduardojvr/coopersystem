@@ -8,4 +8,6 @@ export class TipoUsuario {
 
   @Column({ length: 100 })
   tipoUsuario: string;
+
 }
+
