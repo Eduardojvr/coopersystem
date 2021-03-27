@@ -23,8 +23,13 @@ export class UsuarioService {
     return this.tipoUsuarioRepository.find();
   }
 
-  async cadastrar(): Promise<TipoUsuario[]> {
-    return this.tipoUsuarioRepository.find();
+  async cadastrar(usuario: Usuario) {
+    return this.usuarioRepository.save(usuario);
+  }
+
+  async getsuario(usuario: string){
+    return await this.usuarioRepository.findOne({usuario});
+
   }
 
   async editar(): Promise<TipoUsuario[]> {

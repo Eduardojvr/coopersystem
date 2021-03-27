@@ -22,6 +22,7 @@ UsuarioModule = __decorate([
             ...usuario_providers_1.usuarioProviders,
             usuario_service_1.UsuarioService,
         ],
+        exports: [usuario_service_1.UsuarioService],
     })
 ], UsuarioModule);
 exports.UsuarioModule = UsuarioModule;

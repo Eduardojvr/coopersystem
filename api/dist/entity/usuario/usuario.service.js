@@ -26,8 +26,11 @@ let UsuarioService = class UsuarioService {
     async tiposUsuario() {
         return this.tipoUsuarioRepository.find();
     }
-    async cadastrar() {
-        return this.tipoUsuarioRepository.find();
+    async cadastrar(usuario) {
+        return this.usuarioRepository.save(usuario);
+    }
+    async getsuario(usuario) {
+        return await this.usuarioRepository.findOne({ usuario });
     }
     async editar() {
         return this.tipoUsuarioRepository.find();

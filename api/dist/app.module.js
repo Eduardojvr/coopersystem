@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const auth_module_1 = require("./auth/auth.module");
 const usuario_module_1 = require("./entity/usuario/usuario.module");
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
@@ -18,6 +19,7 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     common_1.Module({
         imports: [
+            auth_module_1.AuthModule,
             serve_static_1.ServeStaticModule.forRoot({
                 rootPath: path_1.join(__dirname, '..', 'src/resources/pages'),
             }),

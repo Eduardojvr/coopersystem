@@ -7,7 +7,8 @@ export declare class UsuarioService {
     constructor(usuarioRepository: Repository<Usuario>, tipoUsuarioRepository: Repository<TipoUsuario>);
     listar(): Promise<Usuario[]>;
     tiposUsuario(): Promise<TipoUsuario[]>;
-    cadastrar(): Promise<TipoUsuario[]>;
+    cadastrar(usuario: Usuario): Promise<Usuario>;
+    getsuario(usuario: string): Promise<Usuario>;
     editar(): Promise<TipoUsuario[]>;
     visualizar(): Promise<TipoUsuario[]>;
 }

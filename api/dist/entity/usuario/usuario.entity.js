@@ -20,10 +20,6 @@ __decorate([
 __decorate([
     typeorm_1.Column({ length: 100 }),
     __metadata("design:type", String)
-], Usuario.prototype, "nome", void 0);
-__decorate([
-    typeorm_1.Column({ length: 100 }),
-    __metadata("design:type", String)
 ], Usuario.prototype, "usuario", void 0);
 __decorate([
     typeorm_1.Column({ length: 250 }),

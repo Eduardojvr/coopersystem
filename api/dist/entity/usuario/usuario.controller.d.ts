@@ -6,4 +6,5 @@ export declare class UsuarioController {
     constructor(usuarioService: UsuarioService);
     all(): Promise<Usuario[]>;
     tipoUsuario(): Promise<TipoUsuario[]>;
+    cadastrar(usuario: Usuario): Promise<Usuario>;
 }
