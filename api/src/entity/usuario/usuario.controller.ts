@@ -23,12 +23,14 @@ export class UsuarioController {
     return this.usuarioService.tiposUsuario();
   }
 
+  @UseGuards(JwtGuard)
   @Post('/cadastrar')
   async cadastrar(@Body() usuario: Usuario) {
     return this.usuarioService.cadastrar(usuario);
  
   }
 
+  @UseGuards(JwtGuard)
   @Post('/atualizar')
   async atualizar(@Body() usuario: Usuario) {
     console.log(usuario);
@@ -36,11 +38,13 @@ export class UsuarioController {
  
   }
 
+  @UseGuards(JwtGuard)
   @Get('/listar')
   async listar(): Promise<any[]> {
     return this.usuarioService.listar();
   }
 
+  @UseGuards(JwtGuard)
   @Get('/meuUsuario')
   async meuUsuario(@Request() usuario: any):Promise<any> {
     return this.usuarioService.getsuario(usuario.query.usuario);
