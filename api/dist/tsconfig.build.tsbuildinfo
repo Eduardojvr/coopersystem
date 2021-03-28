@@ -3432,7 +3432,7 @@
         "affectsGlobalScope": false
       },
       "../src/entity/usuario/usuario.controller.ts": {
-        "version": "25b0c8d798c565d892056330c980f3afa2aebbab6f856320c445dd0d0f5930d3",
+        "version": "21b55678fb7962f015be7f1e116db332ec4cc3931a3b99437a259eac3e1982ba",
         "signature": "5607af63ea16c26c56fabc6b2bcddf122b1ba8f9b5b86ec034012c692ecc964c",
         "affectsGlobalScope": false
       },

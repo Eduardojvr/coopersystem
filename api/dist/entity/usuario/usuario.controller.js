@@ -79,6 +79,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "tipoUsuario", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtGuard),
     common_1.Post('/cadastrar'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -86,6 +87,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "cadastrar", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtGuard),
     common_1.Post('/atualizar'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -93,12 +95,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "atualizar", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtGuard),
     common_1.Get('/listar'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "listar", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtGuard),
     common_1.Get('/meuUsuario'),
     __param(0, common_1.Request()),
     __metadata("design:type", Function),
