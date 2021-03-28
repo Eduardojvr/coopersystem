@@ -48,7 +48,7 @@ Desenvolver CRUD com gestão de permissionamento
 
 ```Terminal
 
-    usuario: visitante@gmail.com
+    usuario: coopersystemsmtp@gmail.com
     senha: 12345
 ```
 
