@@ -5,7 +5,9 @@ Desenvolver CRUD com gestão de permissionamento
 
 ## Tecnologias
 - Node
-- Vue.js cli
+- Vue.js
+- Typeorm
+- REST (apenas json)
 - Banco mysql ou postgres
 - Heroku (hospedagem do banco de dados)
 - Nest (framework para construção de API)
