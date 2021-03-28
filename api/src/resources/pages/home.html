@@ -28,6 +28,8 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Inicio</a></li>
+                <li class="active"><a href="../">Sair</a></li>
+
                 <!-- <li><a href="#">Page 1</a></li>
                 <li><a href="#">Page 2</a></li>
                 <li><a href="#">Page 3</a></li> -->
@@ -57,7 +59,7 @@
                         <span class="spa"> Usuario: </span>
                         <p>{{ itemSelecionado.usuario }}</p>
                         <span class="spa">Permissão de visualização:</span>
-                        <p><select v-if="itemSelecionado.editar" v-model="itemSelecionado.visualizar">
+                        <p><select v-if="meuUsuario.editar" v-model="itemSelecionado.visualizar">
                                 <option disabled>Escolha um item</option>
                                 <option>true</option>
                                 <option>false</option>
@@ -67,7 +69,7 @@
                         
                         </p>
                         <span class="spa">Permissão de edição:</span>
-                        <p><select v-if="itemSelecionado.editar" v-model="itemSelecionado.editar">
+                        <p><select v-if="meuUsuario.editar" v-model="itemSelecionado.editar">
                             <option disabled>Escolha um item</option>
                             <option>true</option>
                             <option>false</option>
@@ -75,7 +77,7 @@
                        <span v-else>{{ itemSelecionado.editar }}</span></p>
 
                         <span class="spa">Permissão de cadastro:</span>
-                        <p><select v-if="itemSelecionado.editar" v-model="itemSelecionado.cadastrar">
+                        <p><select v-if="meuUsuario.editar" v-model="itemSelecionado.cadastrar">
                             <option disabled>Escolha um item</option>
                             <option>true</option>
                             <option>false</option>
@@ -83,7 +85,7 @@
                        <span v-else>{{ itemSelecionado.cadastrar }}</span></p>
                        
                         <span class="spa"> Permissão de listagem:</span>
-                        <p><select v-if="itemSelecionado.editar" v-model="itemSelecionado.listar">
+                        <p><select v-if="meuUsuario.editar" v-model="itemSelecionado.listar">
                             <option disabled>Escolha um item</option>
                             <option>true</option>
                             <option>false</option>
@@ -176,6 +178,9 @@
                     </b-btn>
                     <b-btn v-if="meuUsuario.visualizar" v-else variant="primary" @click="visualizar(item)">
                         Visualizar
+                    </b-btn>
+                    <b-btn v-else="meuUsuario.editar">
+                        Sem permissão para visualizar!
                     </b-btn>
                 </template>
             </b-table>
