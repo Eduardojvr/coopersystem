@@ -13,6 +13,12 @@ Desenvolver CRUD com gestão de permissionamento
 - Nest (framework para construção de API)
 - Swager (documentação de api)
 
+
+## Acessando a documentação da api
+```Terminal
+    http://localhost:3000/endpoints/
+```
+
 ## Rodando a aplicação
 
 1. Pelo terminal, navegue até a pasta api e, dentro dela, digite:
