@@ -30,6 +30,7 @@ export class UsuarioController {
 
   @Post('/atualizar')
   async atualizar(@Body() usuario: Usuario) {
+    console.log(usuario);
     return this.usuarioService.atualizar(usuario);
  
   }

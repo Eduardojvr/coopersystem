@@ -28,6 +28,7 @@ let UsuarioController = class UsuarioController {
         return this.usuarioService.cadastrar(usuario);
     }
     async atualizar(usuario) {
+        console.log(usuario);
         return this.usuarioService.atualizar(usuario);
     }
     async listar() {
