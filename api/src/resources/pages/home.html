@@ -11,26 +11,54 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+
 </head>
 
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Coopersystem</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>
-          </ul>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Coopersystem</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li>
+                <li><a href="#">Page 3</a></li>
+            </ul>
         </div>
-      </nav><br><br>
-      <h1>Tipos de Usuário</h1><br>
+    </nav><br><br>
+    <h1>Lista de usuário</h1><br>
     <div id="lista">
         <div class="tabela">
-            <b-table responsive :items="listaUsuario"></b-table>
+            <b-table :items="listaUsuario" :fields="fields">
+                <template v-for="field in editableFields" v-slot:[`cell(${field.key})`]="{ value, item, field }">
+                    <!-- <b-input v-if="userRow && userRow.id === item.id" v-model="userRow[field.key]"
+                        :options="tipoUsuario" :number="field.isNumber">
+                    </b-input> -->
+                    <!-- <b-form-select v-if="userRow && userRow.id === item.id" v-model="userRow[field.key]"
+                    :options="tipoUser"></b-form-select> -->
+                    <select v-if="userRow && userRow.id === item.id" v-model="userRow[field.key]">
+                        <option v-for="option in tipoUser" v-bind:value="option.idTipo">
+                            {{ option.tipoUsuario }}
+                        </option>
+                    </select>
+                    <template v-else>{{ value }}</template>
+                </template>
+                <template v-slot:cell(actions)="{ item }">
+                    <b-button-group v-if="userRow && userRow.id === item.id">
+                        <b-btn variant="success" @click="saveEdit">
+                            Salvar
+                        </b-btn>
+                        <b-btn variant="danger" @click="resetEdit">
+                            Cancelar
+                        </b-btn>
+                    </b-button-group>
+                    <b-btn v-else variant="primary" @click="editUser(item)">
+                        Editar
+                    </b-btn>
+                </template>
+            </b-table>
         </div>
     </div>
 
@@ -39,26 +67,96 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-vue/2.21.2/bootstrap-vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 
- <script>
+    <script>
 
         new Vue({
             el: '#lista',
+            computed: {
+                editableFields() {
+                    return this.fields.filter((field) => field.editable);
+                }
+            },
             data() {
                 return {
-                    listaUsuario: []
+                    listaUsuario: [],
+                    userRow: null,
+                    tipoUser: [],
+                    fields: [
+                        { key: "id" },
+                        { key: "usuario", editable: false },
+                        { key: "senha", editable: false },
+                        { key: "tipoUsuario", editable: true, type: "text", isNumber: true },
+                        { key: "actions" }
+                    ]
                 }
             },
             created: function () {
                 const vm = this;
-
-                axios.get('http://localhost:3000/api/tipoUsuario').then(function(response){
+                const config = {
+                    headers: { Authorization: 'Bearer ' + sessionStorage.getItem('token') }
+                };
+                axios.get('http://localhost:3000/api/listar', config).then(function (response) {
                     console.log(response.data);
                     vm.listaUsuario = response.data;
+                    axios.get('http://localhost:3000/api/tipoUsuario', config).then(function (response) {
+                        console.log(response.data);
+                        vm.tipoUser = response.data;
+
+                        console.log(vm.tipoUser);
+
+                        for (var x = 0; x < vm.listaUsuario.length; x++) {
+                            if (vm.listaUsuario[x].tipoUsuario == 4) {
+                                vm.listaUsuario[x].tipoUsuario = 'Admin'
+                            } else if (vm.listaUsuario[x].tipoUsuario == 14) {
+                                vm.listaUsuario[x].tipoUsuario = 'Convidado'
+
+                            } else if (vm.listaUsuario[x].tipoUsuario == 24) {
+                                vm.listaUsuario[x].tipoUsuario = 'Master'
+
+                            } else if (vm.listaUsuario[x].tipoUsuario == 0) {
+                                vm.listaUsuario[x].tipoUsuario = 'Sem perfil'
+                            }
+                        }
+                    })
+
                 })
+
+
+
+            },
+            methods: {
+                editUser(user) {
+                    let doEdit = true;
+                    if (
+                        this.userRow &&
+                        !confirm(
+                            "Tem certeza que deseja cancelar a edição?"
+                        )
+                    ) {
+                        doEdit = false;
+                    }
+
+                    if (doEdit) {
+                        this.userRow = { ...user };
+                    }
+                },
+                saveEdit() {
+                    let user = this.listaUsuario.find((u) => u.id === this.userRow.id);
+                    Object.assign(user, this.userRow);
+                    const config = {
+                        headers: { Authorization: 'Bearer ' + sessionStorage.getItem('token') }
+                    };
+                    console.log(user);
+                    axios.post('http://localhost:3000/api/atualizar', user, config).then(function (response) {
+
+                    })
+                },
+                resetEdit() {
+                    this.userRow = null;
+                }
             }
         });
     </script>
 </body>
 
 </html>
-

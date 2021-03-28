@@ -9,6 +9,6 @@ export declare class UsuarioService {
     tiposUsuario(): Promise<TipoUsuario[]>;
     cadastrar(usuario: Usuario): Promise<Usuario>;
     getsuario(usuario: string): Promise<Usuario>;
-    editar(): Promise<TipoUsuario[]>;
+    atualizar(usuario: Usuario): Promise<import("typeorm").UpdateResult>;
     visualizar(): Promise<TipoUsuario[]>;
 }

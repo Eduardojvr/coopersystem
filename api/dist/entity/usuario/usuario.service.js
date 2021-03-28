@@ -32,8 +32,8 @@ let UsuarioService = class UsuarioService {
     async getsuario(usuario) {
         return await this.usuarioRepository.findOne({ usuario });
     }
-    async editar() {
-        return this.tipoUsuarioRepository.find();
+    async atualizar(usuario) {
+        return await this.usuarioRepository.update(usuario.id, usuario);
     }
     async visualizar() {
         return this.tipoUsuarioRepository.find();

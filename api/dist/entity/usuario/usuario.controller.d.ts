@@ -7,4 +7,5 @@ export declare class UsuarioController {
     all(): Promise<Usuario[]>;
     tipoUsuario(): Promise<TipoUsuario[]>;
     cadastrar(usuario: Usuario): Promise<Usuario>;
+    atualizar(usuario: Usuario): Promise<import("typeorm").UpdateResult>;
 }

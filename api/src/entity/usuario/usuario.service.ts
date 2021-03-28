@@ -32,8 +32,8 @@ export class UsuarioService {
 
   }
 
-  async editar(): Promise<TipoUsuario[]> {
-    return this.tipoUsuarioRepository.find();
+  async atualizar(usuario : Usuario) {
+    return await this.usuarioRepository.update(usuario.id, usuario);
   }
 
   async visualizar(): Promise<TipoUsuario[]> {

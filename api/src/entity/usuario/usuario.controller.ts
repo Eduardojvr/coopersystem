@@ -1,7 +1,7 @@
 import { TipoUsuario } from './tipoUsuario.entity';
 import { Usuario } from './usuario.entity';
 
-import { Controller, Get , Response, Post, Body, UseGuards} from '@nestjs/common';
+import { Controller, Get , Response, Post, Body, UseGuards, Put} from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 
 import {JwtGuard} from '../../auth/shared/jwt-auth.guard'
@@ -25,6 +25,12 @@ export class UsuarioController {
   @Post('/cadastrar')
   async cadastrar(@Body() usuario: Usuario) {
     return this.usuarioService.cadastrar(usuario);
+ 
+  }
+
+  @Post('/atualizar')
+  async atualizar(@Body() usuario: Usuario) {
+    return this.usuarioService.atualizar(usuario);
  
   }
 

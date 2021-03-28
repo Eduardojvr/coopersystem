@@ -30,6 +30,9 @@ let UsuarioController = class UsuarioController {
     async cadastrar(usuario) {
         return this.usuarioService.cadastrar(usuario);
     }
+    async atualizar(usuario) {
+        return this.usuarioService.atualizar(usuario);
+    }
 };
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtGuard),
@@ -52,6 +55,13 @@ __decorate([
     __metadata("design:paramtypes", [usuario_entity_1.Usuario]),
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "cadastrar", null);
+__decorate([
+    common_1.Post('/atualizar'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [usuario_entity_1.Usuario]),
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "atualizar", null);
 UsuarioController = __decorate([
     common_1.Controller(),
     __metadata("design:paramtypes", [usuario_service_1.UsuarioService])
