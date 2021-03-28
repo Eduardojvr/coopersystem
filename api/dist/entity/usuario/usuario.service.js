@@ -20,13 +20,15 @@ let UsuarioService = class UsuarioService {
         this.usuarioRepository = usuarioRepository;
         this.tipoUsuarioRepository = tipoUsuarioRepository;
     }
-    async listar() {
-        return this.usuarioRepository.find();
+    async getRepositoryUsuario() {
+        return (this.usuarioRepository);
     }
     async tiposUsuario() {
         return this.tipoUsuarioRepository.find();
     }
     async cadastrar(usuario) {
+        usuario.tipoUsuario = 0;
+        console.log(usuario);
         return this.usuarioRepository.save(usuario);
     }
     async getsuario(usuario) {
@@ -35,8 +37,10 @@ let UsuarioService = class UsuarioService {
     async atualizar(usuario) {
         return await this.usuarioRepository.update(usuario.id, usuario);
     }
-    async visualizar() {
-        return this.tipoUsuarioRepository.find();
+    async listar() {
+        const tmp = await this.usuarioRepository.createQueryBuilder('user')
+            .innerJoinAndSelect("user.tipoUsuario", "idTipoUsuario").getMany();
+        return tmp;
     }
 };
 UsuarioService = __decorate([

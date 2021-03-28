@@ -1,7 +1,7 @@
 import { TipoUsuario } from './tipoUsuario.entity';
 import { Usuario } from './usuario.entity';
 
-import { Controller, Get , Response, Post, Body, UseGuards, Put} from '@nestjs/common';
+import { Controller, Get , Response, Post, Body, UseGuards, Put, Request} from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 
 import {JwtGuard} from '../../auth/shared/jwt-auth.guard'
@@ -10,11 +10,11 @@ import {JwtGuard} from '../../auth/shared/jwt-auth.guard'
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
-  @UseGuards(JwtGuard)
-  @Get('/listar')
-  async all(): Promise<Usuario[]> {
-    return this.usuarioService.listar();
-  }
+  // @UseGuards(JwtGuard)
+  // @Get('/listar')
+  // async all(): Promise<Usuario[]> {
+  //   return this.usuarioService.listar();
+  // }
 
   @UseGuards(JwtGuard)
   @Get('/tipoUsuario')
@@ -33,6 +33,17 @@ export class UsuarioController {
     return this.usuarioService.atualizar(usuario);
  
   }
+
+  @Get('/listar')
+  async listar(): Promise<any[]> {
+    return this.usuarioService.listar();
+  }
+
+  @Get('/meuUsuario')
+  async meuUsuario(@Request() usuario: any):Promise<any> {
+    return this.usuarioService.getsuario(usuario.query.usuario);
+  }
+
 
 
 }

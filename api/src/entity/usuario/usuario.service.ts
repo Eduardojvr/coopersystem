@@ -3,7 +3,7 @@ import { TipoUsuario } from './tipoUsuario.entity';
 
 
 import { Injectable, Inject } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, ManyToOne } from 'typeorm';
 
 @Injectable()
 export class UsuarioService {
@@ -13,10 +13,16 @@ export class UsuarioService {
 
     @Inject('TIPOUSUARIO_REPOSITORY')
     private tipoUsuarioRepository: Repository<TipoUsuario>,
+
+
+
   ) {}
 
-  async listar(): Promise<Usuario[]> {
-    return this.usuarioRepository.find();
+  // async listar(): Promise<Usuario[]> {
+  //   return this.usuarioRepository.find();
+  // }
+  async getRepositoryUsuario(): Promise<Repository<Usuario>> {
+    return (this.usuarioRepository);
   }
 
   async tiposUsuario(): Promise<TipoUsuario[]> {
@@ -24,6 +30,8 @@ export class UsuarioService {
   }
 
   async cadastrar(usuario: Usuario) {
+    usuario.tipoUsuario = 0;
+    console.log(usuario);
     return this.usuarioRepository.save(usuario);
   }
 
@@ -36,8 +44,15 @@ export class UsuarioService {
     return await this.usuarioRepository.update(usuario.id, usuario);
   }
 
-  async visualizar(): Promise<TipoUsuario[]> {
-    return this.tipoUsuarioRepository.find();
+  async listar(): Promise<any[]> {
+    const tmp = await this.usuarioRepository.createQueryBuilder('user')
+    .innerJoinAndSelect("user.tipoUsuario", "idTipoUsuario").getMany();
+    // .select("*")
+    // .from(Usuario, "user")
+    // .innerJoin(TipoUsuario, "tipoUser")
+    // .where("user.tipoUsuario = tipoUser.idTipo").execute();
+    return tmp;
   }
+
 
 }

@@ -1,3 +1,5 @@
+import { APP_FILTER } from '@nestjs/core';
+import { AllExceptionsFilter } from './entity/exception.filter';
 import { AuthModule } from './auth/auth.module';
 import { UsuarioModule } from './entity/usuario/usuario.module';
 import { Module } from '@nestjs/common';
@@ -15,6 +17,10 @@ import { join } from 'path'; // New
     UsuarioModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    }, AppService],
 })
 export class AppModule { }

@@ -11,10 +11,16 @@ export class AuthService {
     ){}
 
     async validateUser(usuario: string, senha: string) {
-        const user = await this.usuarioService.getsuario(usuario);
+        let user = await this.usuarioService.getsuario(usuario);
         if (user && user.senha === senha) {
           const { id, usuario, tipoUsuario} = user;
-          return { id: id, usuario, tipoUsuario };
+    //      const rep = await this.usuarioService.getRepositoryUsuario()
+    //      const tmp = await rep.createQueryBuilder('user')
+    // .innerJoinAndSelect("user.tipoUsuario", "idTipoUsuario")
+    // .where("id = user.id")
+    // .getOne();
+    // console.log( tmp.tipoUsuario["idTipo"]);
+          return { id: id, usuario};
         }
     
         return null;

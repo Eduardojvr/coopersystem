@@ -21,9 +21,6 @@ let UsuarioController = class UsuarioController {
     constructor(usuarioService) {
         this.usuarioService = usuarioService;
     }
-    async all() {
-        return this.usuarioService.listar();
-    }
     async tipoUsuario() {
         return this.usuarioService.tiposUsuario();
     }
@@ -33,14 +30,13 @@ let UsuarioController = class UsuarioController {
     async atualizar(usuario) {
         return this.usuarioService.atualizar(usuario);
     }
+    async listar() {
+        return this.usuarioService.listar();
+    }
+    async meuUsuario(usuario) {
+        return this.usuarioService.getsuario(usuario.query.usuario);
+    }
 };
-__decorate([
-    common_1.UseGuards(jwt_auth_guard_1.JwtGuard),
-    common_1.Get('/listar'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], UsuarioController.prototype, "all", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtGuard),
     common_1.Get('/tipoUsuario'),
@@ -62,6 +58,19 @@ __decorate([
     __metadata("design:paramtypes", [usuario_entity_1.Usuario]),
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "atualizar", null);
+__decorate([
+    common_1.Get('/listar'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "listar", null);
+__decorate([
+    common_1.Get('/meuUsuario'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "meuUsuario", null);
 UsuarioController = __decorate([
     common_1.Controller(),
     __metadata("design:paramtypes", [usuario_service_1.UsuarioService])

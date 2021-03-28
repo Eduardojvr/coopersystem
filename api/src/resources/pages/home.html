@@ -12,6 +12,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
+    <style>
+.spa{
+    color: rgb(142, 145, 11)
+}
+
+    </style>
+
 </head>
 
 <body>
@@ -21,15 +28,81 @@
                 <a class="navbar-brand" href="#">Coopersystem</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>
+                <li class="active"><a href="#">Inicio</a></li>
+                <!-- <li><a href="#">Page 1</a></li>
                 <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
+                <li><a href="#">Page 3</a></li> -->
             </ul>
         </div>
     </nav><br><br>
-    <h1>Lista de usuário</h1><br>
     <div id="lista">
+        <button v-if="meuUsuario.cadastrar" type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#exampleModal">
+            Cadastrar</button>
+        <button v-if="meuUsuario.listar" @click="listar" type="button" class="btn btn-warning">Listar</button>
+        <!-- <button v-if="meuUsuario.visualizar" type="button" class="btn btn-success">Visualizar</button> -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Visualização</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <span class="spa">Identiicador:</span>  <p>{{ itemSelecionado.id }}</p>
+                <span class="spa"> Usuario: </span> <p>{{ itemSelecionado.usuario }}</p>
+                <span class="spa">Permissão de visualização:</span>  <p>{{ itemSelecionado.visualizar }}</p>
+                <span class="spa">Permissão de edição:</span>  <p>{{ itemSelecionado.editar }}</p>
+                <span class="spa">Permissão de cadastro:</span>  <p>{{ itemSelecionado.cadastrar }}</p>
+                <span class="spa"> Permissão de listagem:</span>  <p>{{ itemSelecionado.listar }}</p>
+                <span class="spa"> Tipo de usuário:</span> <p>{{ itemSelecionado.tipoUsuario }}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cadastro de usuário</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Cpf ou email</span>
+                            </div>
+                            <input v-model="cadastroUsuario.usuario" type="text" class="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Senha</span>
+                            </div>
+                            <input v-model="cadastroUsuario.senha" type="text" class="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button @click="cadastraUsuario" data-dismiss="modal" type="button"
+                            class="btn btn-primary">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+        </div><br><br>
+        <h1>Painel</h1><br>
         <div class="tabela">
             <b-table :items="listaUsuario" :fields="fields">
                 <template v-for="field in editableFields" v-slot:[`cell(${field.key})`]="{ value, item, field }">
@@ -40,7 +113,7 @@
                     :options="tipoUser"></b-form-select> -->
                     <select v-if="userRow && userRow.id === item.id" v-model="userRow[field.key]">
                         <option v-for="option in tipoUser" v-bind:value="option.idTipo">
-                            {{ option.tipoUsuario }}
+                            {{ option.idTipoUsuario }}
                         </option>
                     </select>
                     <template v-else>{{ value }}</template>
@@ -54,12 +127,20 @@
                             Cancelar
                         </b-btn>
                     </b-button-group>
-                    <b-btn v-else variant="primary" @click="editUser(item)">
+                    <b-btn v-if="meuUsuario.editar" v-else variant="primary" @click="editUser(item)">
                         Editar
+                    </b-btn>
+                    <b-btn v-else="meuUsuario.editar">
+                        Sem permissão para editar!
+                    </b-btn>
+                    <b-btn v-if="meuUsuario.visualizar" v-else variant="primary" @click="visualizar(item)">
+                        Visualizar
                     </b-btn>
                 </template>
             </b-table>
         </div>
+
+
     </div>
 
 
@@ -78,13 +159,24 @@
             },
             data() {
                 return {
+                    cadastroUsuario: {
+                        id: '',
+                        usuario: '',
+                        senha: '',
+                        tipoUsuario: '',
+                        visualizar: 0,
+                        editar: 0,
+                        cadastrar: 0,
+                        listar: 0
+                    },
+                    itemSelecionado: {},
+                    meuUsuario: {},
                     listaUsuario: [],
                     userRow: null,
                     tipoUser: [],
                     fields: [
-                        { key: "id" },
+                        // { key: "id" },
                         { key: "usuario", editable: false },
-                        { key: "senha", editable: false },
                         { key: "tipoUsuario", editable: true, type: "text", isNumber: true },
                         { key: "actions" }
                     ]
@@ -95,36 +187,71 @@
                 const config = {
                     headers: { Authorization: 'Bearer ' + sessionStorage.getItem('token') }
                 };
-                axios.get('http://localhost:3000/api/listar', config).then(function (response) {
+                axios.get('http://localhost:3000/api/tipoUsuario', config).then(function (response) {
                     console.log(response.data);
-                    vm.listaUsuario = response.data;
-                    axios.get('http://localhost:3000/api/tipoUsuario', config).then(function (response) {
-                        console.log(response.data);
-                        vm.tipoUser = response.data;
+                    vm.tipoUser = response.data;
 
-                        console.log(vm.tipoUser);
+                    console.log(vm.tipoUser);
 
-                        for (var x = 0; x < vm.listaUsuario.length; x++) {
-                            if (vm.listaUsuario[x].tipoUsuario == 4) {
-                                vm.listaUsuario[x].tipoUsuario = 'Admin'
-                            } else if (vm.listaUsuario[x].tipoUsuario == 14) {
-                                vm.listaUsuario[x].tipoUsuario = 'Convidado'
 
-                            } else if (vm.listaUsuario[x].tipoUsuario == 24) {
-                                vm.listaUsuario[x].tipoUsuario = 'Master'
+                })
 
-                            } else if (vm.listaUsuario[x].tipoUsuario == 0) {
-                                vm.listaUsuario[x].tipoUsuario = 'Sem perfil'
-                            }
-                        }
-                    })
+                axios.get('http://localhost:3000/api/meuUsuario/?usuario=' + sessionStorage.getItem('usuario'), config).then(function (response) {
+                    console.log(response);
+                    vm.meuUsuario = response.data;
+
 
                 })
 
 
 
+
+
+
             },
             methods: {
+//                 modificaPermissao : function(){
+//                     const vm = this;
+//                     axios.post('http://localhost:3000/api/atualizar', user, config).then(function (response) {
+
+// })
+//                 },
+                visualizar: function (item) {
+                    const vm = this;
+                    vm.itemSelecionado = item;
+                    $('#exampleModal2').modal('show');
+                },
+                listar: function () {
+                    const vm = this;
+                    const config = {
+                        headers: { Authorization: 'Bearer ' + sessionStorage.getItem('token') }
+                    };
+                    axios.get('http://localhost:3000/api/listar', config).then(function (response) {
+                        console.log(response.data);
+                        vm.listaUsuario = response.data;
+                        vm.listaUsuario.forEach(function (user, i) {
+                            if (vm.listaUsuario[i].tipoUsuario.idTipo == 4) {
+                                vm.listaUsuario[i].tipoUsuario = 'Admin'
+                            } else if (vm.listaUsuario[i].tipoUsuario.idTipo == 14) {
+                                vm.listaUsuario[i].tipoUsuario = 'Convidado'
+
+                            } else if (vm.listaUsuario[i].tipoUsuario.idTipo == 24) {
+                                vm.listaUsuario[i].tipoUsuario = 'Master'
+
+                            } else if (vm.listaUsuario[i].tipoUsuario.idTipo == 0) {
+                                vm.listaUsuario[i].tipoUsuario = 'Sem perfil'
+                            }
+                        })
+                    })
+
+                },
+                cadastraUsuario: function () {
+                    const vm = this;
+                    axios.post('http://localhost:3000/api/cadastrar', vm.cadastroUsuario).then(function (response) {
+
+                        vm.listar()
+                    })
+                },
                 editUser(user) {
                     let doEdit = true;
                     if (

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Usuario = void 0;
+const tipoUsuario_entity_1 = require("./tipoUsuario.entity");
 const typeorm_1 = require("typeorm");
 let Usuario = class Usuario {
 };
@@ -26,9 +27,26 @@ __decorate([
     __metadata("design:type", String)
 ], Usuario.prototype, "senha", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.ManyToOne(type => tipoUsuario_entity_1.TipoUsuario),
+    typeorm_1.JoinColumn({ name: 'tipoUsuario' }),
     __metadata("design:type", Number)
 ], Usuario.prototype, "tipoUsuario", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Boolean)
+], Usuario.prototype, "visualizar", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Boolean)
+], Usuario.prototype, "editar", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Boolean)
+], Usuario.prototype, "cadastrar", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Boolean)
+], Usuario.prototype, "listar", void 0);
 Usuario = __decorate([
     typeorm_1.Entity()
 ], Usuario);

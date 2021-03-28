@@ -2,12 +2,13 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class TipoUsuario {
+export class Permissao {
+
   @PrimaryGeneratedColumn()
   idTipo: number;
 
   @Column({ length: 100 })
-  idTipoUsuario: string;
+  tipoPermissao: string;
 
 }
 

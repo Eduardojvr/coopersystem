@@ -46,10 +46,10 @@
                     <a class="navbar-brand" href="#">Coopersystem</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="home.html">Page 1</a></li>
+                    <!-- <li class="active"><a href="#">Home</a></li> -->
+                    <!-- <li><a href="home.html">Page 1</a></li>
                     <li><a href="#">Page 2</a></li>
-                    <li><a href="#">Page 3</a></li>
+                    <li><a href="#">Page 3</a></li> -->
                 </ul>
             </div>
         </nav><br><br>
@@ -104,8 +104,11 @@
             methods: {
                 login: function () {
                     const vm = this;
+                    sessionStorage.setItem('usuario', vm.usuarioLogin.usuario);
+
                     axios.post('api/auth/login', vm.usuarioLogin).then(function (response) {
                         sessionStorage.setItem('token', response.data.access_token);
+
                         if(response.status == 201 && response.data.ref.tipoUsuario != 0 ){
                             window.location.href = 'home.html'
                         } else {

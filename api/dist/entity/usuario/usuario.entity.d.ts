@@ -3,4 +3,8 @@ export declare class Usuario {
     usuario: string;
     senha: string;
     tipoUsuario: number;
+    visualizar: boolean;
+    editar: boolean;
+    cadastrar: boolean;
+    listar: boolean;
 }
