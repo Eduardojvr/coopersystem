@@ -9,4 +9,5 @@ export declare class UsuarioController {
     atualizar(usuario: Usuario): Promise<import("typeorm").UpdateResult>;
     listar(): Promise<any[]>;
     meuUsuario(usuario: any): Promise<any>;
+    gerar(usuario: any): Promise<any>;
 }

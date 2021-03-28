@@ -3432,8 +3432,8 @@
         "affectsGlobalScope": false
       },
       "../src/entity/usuario/usuario.controller.ts": {
-        "version": "b88dda65dac75fca0605610aca192ab150fef4c9df573055ff7f71e4809c3586",
-        "signature": "c94622c0f586e0ce99462e4f4c9d1a9fa766181f32ce8ad953dbee91723cabec",
+        "version": "25b0c8d798c565d892056330c980f3afa2aebbab6f856320c445dd0d0f5930d3",
+        "signature": "5607af63ea16c26c56fabc6b2bcddf122b1ba8f9b5b86ec034012c692ecc964c",
         "affectsGlobalScope": false
       },
       "../src/entity/usuario/usuario.module.ts": {

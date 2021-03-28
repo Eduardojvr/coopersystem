@@ -40,6 +40,31 @@
 
 <body>
     <div id="login">
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Gerar nova senha</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <span>Digite seu email:</span>
+                    <input v-model="email" type="text"><br>
+                    <span>Obs: Só é possível gerar uma nova senha a partir de um email.</span>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button @click="gerar" data-dismiss="modal" type="button"
+                        class="btn btn-primary">Gerar nova senha</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -81,7 +106,7 @@
             <div class="st-link">
                 <button type="button" class="btn btn-link"
                     onclick="window.location.href = 'cadastro.html'">Cadastrar</button>
-                <button type="button" class="btn btn-link">Esqueci minha senha</button>
+                <button @click="esqueci" type="button" class="btn btn-link">Esqueci minha senha</button>
             </div>
         </div>
     </div>
@@ -98,10 +123,22 @@
                     usuarioLogin: {
                         usuario: '',
                         senha: ''
-                    }
+                    },
+                    email: ''
                 }
             },
             methods: {
+                gerar: function(){
+                    const vm = this;
+                    // alert(vm.email);
+                    axios.get('http://localhost:3000/api/gerar/?usuario='+vm.email).then(function(response){
+                        alert("Nova senha enviada para seu email!");
+                    })
+                },
+                esqueci: function(){
+                    const vm = this;
+                    $('#exampleModal2').modal('show');
+                },
                 login: function () {
                     const vm = this;
                     sessionStorage.setItem('usuario', vm.usuarioLogin.usuario);

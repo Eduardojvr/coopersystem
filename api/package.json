@@ -32,6 +32,7 @@
     "cors": "^2.8.5",
     "fastify-swagger": "^4.4.2",
     "mysql": "^2.18.1",
+    "nodemailer": "^6.5.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",

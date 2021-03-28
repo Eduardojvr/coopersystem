@@ -37,6 +37,39 @@ let UsuarioController = class UsuarioController {
     async meuUsuario(usuario) {
         return this.usuarioService.getsuario(usuario.query.usuario);
     }
+    async gerar(usuario) {
+        const user = await this.usuarioService.getsuario(usuario.query.usuario);
+        user.senha = Math.random().toString(36).slice(-10);
+        this.usuarioService.atualizar(user);
+        var nodemailer = require('nodemailer');
+        var remetente = nodemailer.createTransport({
+            host: 'coopersystemsmtp@gmail.com',
+            service: 'coopersystemsmtp@gmail.com',
+            port: 587,
+            secure: true,
+            auth: {
+                user: 'coopersystemsmtp@gmail.com',
+                pass: 'smtpcooper'
+            }
+        });
+        var emailASerEnviado = {
+            from: 'coopersystemsmtp@gmail.com',
+            to: user.usuario,
+            subject: 'Sua nova senha',
+            text: 'Esta é sua nova senha: ' + user.senha,
+        };
+        if (user) {
+            remetente.sendMail(emailASerEnviado, function (error) {
+                if (error) {
+                    console.log(error);
+                }
+                else {
+                    console.log('Email enviado!');
+                }
+            });
+        }
+        return "Email enviado!";
+    }
 };
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtGuard),
@@ -72,6 +105,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "meuUsuario", null);
+__decorate([
+    common_1.Get('/gerar'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "gerar", null);
 UsuarioController = __decorate([
     common_1.Controller(),
     __metadata("design:paramtypes", [usuario_service_1.UsuarioService])
