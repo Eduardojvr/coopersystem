@@ -53,5 +53,5 @@ Desenvolver CRUD com gestão de permissionamento
 ```
 
 ## Branches
-- Main: Utiliza o Nest como framework para API
+- master: Utiliza o Nest como framework para API
 
